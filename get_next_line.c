@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:37:55 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/05/15 16:05:34 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:08:01 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,70 @@
 
 char	*get_next_line(int fd)
 {
-	static	char* line;
-	int	count;
-	char	*stach;
-	char *buffer[BUFFER_SIZE + 1];
+	static	char* stach;
+	static	int	j;
+	char	*temp;
+	char	*newline;
+	char buffer[BUFFER_SIZE + 1];
 	ssize_t	by_read;
 
-	if (fd < 0 || buffer_size <= 0)
-		return (0);
-	while (line = ft_strchr(fd, '\n'))
+	by_read = 1;
+	buffer = ft_calloc((char) * (BUFFER_SIZE));
+	while ((by_read > 0) && (!ft_strchr(buffer,'\n')))
 	{
-		by_read = read(fd, stach, BUFFEUR_SIZE);
-		line = ft_strjoin(line , stach);
-		return (line);
+		by_read = read(fd, buffer, BUFFER_SIZE);
+		buffer[by_read] = '\0';
+			stach = ft_strjoin(temp, buffer);
+		newline = ft_line(stach);
+			return (newline);
+		temp = ft_strchr(buffer, '\n');	
 	}
 	return (NULL);
 }
 
-
-ssize_t read(int fd, void *buf//lendroit ou mettre les donner lu,
-		 size_t count//octet a lire)
+char * ft_line(char	*str)
 {
-	ssize_t i;
-	return = 0;
-	if (!buf || !fd)
-	{
-		i = -1;
-		return (i);
-	}	
-	while (i < count || buf)
-	{
-		buf[i] = fd[i];
+	int		i;
+	char	*s;
+	static	j;
+
+	if (!str)
+		return (NULL);
+	j++;
+	i = j;
+	while ((str[i]) && (str[i] != '\n'))
 		i++;
+	if(str[i] == '\n')
+		i++;
+	s = ft_calloc(char)*(i));
+	if(!s)
+		return (NULL);
+	while (j < i)
+	{	
+		s[j] = str[j];
+		j++;
 	}
-	return (i)// -1 errruer, 0fin de fichier // >0 byte lue
+	s[j] = '\n';
+	return(s);
 }
 
-// main lecture sortie clavier
+#include <fcntl.h>
+#include <stdio.h>
+#include "get_next_line.h"
+
 int main(void)
 {
-	char buffer[100];
-	ssize_t bytes;
+	char *line;
 
-	// lire jusqu'à 99 caractères depuis l'entrée standard (clavier)
-	bytes = read(0, buffer, 99);
-	if (bytes > 0)
+	printf("Tape des lignes (Ctrl+D pour quitter) :\n");
+	while ((line = get_next_line(0)) != NULL) // fd 0 = clavier
 	{
-		buffer[bytes] = '\0'; // ajouter le \0 pour en faire une chaîne
-		write(1, buffer, bytes); // écrire sur la sortie standard
+		printf(">> %s", line); // afficher ce que tu lis
+		free(line); // libérer la mémoire retournée
 	}
+
+	printf("\nFin du programme.\n");
 	return (0);
 }
+
+

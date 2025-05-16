@@ -6,10 +6,21 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:08:18 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/05/15 12:54:34 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:50:06 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -20,7 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	dest = malloc(len + 1);
+	dest = ft_calloc(len + 1);
 	if (!dest)
 		return (NULL);
 	i = 0;
@@ -62,16 +73,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (dest);
 }
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 char	*ft_strchr(const char *string, int searched)
 {
 	int	i;
@@ -86,4 +87,23 @@ char	*ft_strchr(const char *string, int searched)
 	if ((unsigned char)searched == '\0')
 		return ((char *)&(string[i]));
 	return (NULL);
+}
+
+void	*ft_calloc(size_t ecount, size_t size)
+{
+	unsigned char	*tab;
+	size_t			total;
+	size_t			i;
+
+	total = ecount * size;
+	tab = malloc(ecount * size);
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (i < total)
+	{
+		tab[i] = '\0';
+		i++;
+	}
+	return (tab);
 }
