@@ -24,5 +24,6 @@ char	*ft_strdup(const char*s);
 char	*ft_strchr(const char *string, int searched);
 void	*ft_calloc(size_t ecount, size_t size);
 char * ft_line(char	*str);
+char	*get_next_line(int fd);
 
 #endif /* GET_NEXT_LINE */
