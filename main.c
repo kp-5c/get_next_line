@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 15:22:37 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/05/18 15:22:37 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/05/19 10:14:51 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@ int main(int argc, char **argv)
     close(fd);
     return (0);
 }
-
 
