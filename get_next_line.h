@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:38:13 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/05/19 16:34:58 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:56:24 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	*ft_calloc(size_t ecount, size_t size);
 char * ft_line(char	*str);
 char	*get_next_line(int fd);
 char	* ft_save(char * str);
+char	*ft_error(char *str);
 
 #endif /* GET_NEXT_LINE */

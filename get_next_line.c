@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:37:55 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/05/19 17:03:27 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:56:20 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,29 @@ char	*get_next_line(int fd)
 	{
 		by_read = read(fd, buffer, BUFFER_SIZE);
 		if (by_read <= 0)
-		{
-			free(buffer);
-			return(NULL);
-		}
+			break;
 		buffer[by_read] = '\0';
 		stach = ft_strjoin(stach, buffer);
 		if(!stach)
-		{
-			free(buffer);
-			return(NULL);
-		}
+			ft_error(buffer);
 	}
 	free(buffer);
-	tmp = ft_line(stach);
-  	stach = ft_save(stach);
-	return(tmp);
+	if (stach && *stach)
+	{
+		tmp = ft_line(stach);
+		stach = ft_save(stach);
+		return (tmp);
+	}
+	free(stach);
+	stach = NULL;
+	return (NULL);
 }
 
+char	*ft_error(char *str)
+{
+	free(str);
+	return(NULL);
+}
 char	* ft_save(char * str)
 {
 	int		i;

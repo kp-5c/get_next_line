@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:08:18 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/05/19 14:39:41 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:34:12 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 
 	if (!s1)
-	{
-		s1 = ft_calloc(sizeof(char), 1);
-		s1[0] = '\0';
-	}
+		s1 = ft_calloc(1, 1);
 	if (!s1 || !s2)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
