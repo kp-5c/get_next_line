@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:37:55 by ebenoist          #+#    #+#             */
-/*   Updated: 2025/05/21 11:27:18 by ebenoist         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:04:06 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_and_join(int fd, char *stach)
 {
@@ -57,14 +57,14 @@ static char	*return_and_clean(char **stach)
 
 char	*get_next_line(int fd)
 {
-	static char	*stach;
+	static char	*stach[MAX_FD];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FD)
 		return (NULL);
-	stach = read_and_join(fd, stach);
-	if (!stach)
+	stach[fd] = read_and_join(fd, stach[fd]);
+	if (!stach[fd])
 		return (NULL);
-	return (return_and_clean(&stach));
+	return (return_and_clean(&stach[fd]));
 }
 
 char	*ft_save(char *str)
